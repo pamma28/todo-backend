@@ -51,12 +51,16 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "example": {
-                  "description": "Mengerjakan Test",
-                  "deadline": "2020-05-14",
-                  "done": true
-                },
-                "$ref": "#/definitions/todosModel"
+                "allOf": [
+                  { "$ref": "#/definitions/todosModel" },
+                  {
+                    "example": {
+                      "description": "Mengerjakan Test",
+                      "deadline": "2020-05-14",
+                      "done": true
+                    }
+                  }
+                ]
               }
             }
           }
@@ -93,12 +97,18 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "example": {
-                  "description": "Mengerjakan tes lebih giat",
-                  "deadline": "2020-05-14",
-                  "done": true
-                },
-                "$ref": "#/definitions/todosModel"
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/todosModel"
+                  },
+                  {
+                    "example": {
+                      "description": "Mengerjakan tes lebih giat",
+                      "deadline": "2020-05-14",
+                      "done": true
+                    }
+                  }
+                ]
               }
             }
           }
