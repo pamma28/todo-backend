@@ -131,4 +131,28 @@ describe('Todos', () => {
         });
     }).timeout(10000);
   });
+
+  describe('/DELETE Todo', () => {
+    it('it should delete todo', (done) => {
+      chai
+        .request(server)
+        .delete(`/todos/${todoId}`)
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(204);
+          done();
+        });
+    }).timeout(10000);
+
+    it('it should be failed to delete todo', (done) => {
+      chai
+        .request(server)
+        .delete(`/todos/${todoId}`)
+        .end((err, res) => {
+          expect(err).to.be.throw;
+          expect(res).to.have.status(500);
+          done();
+        });
+    }).timeout(10000);
+  });
 });
