@@ -23,7 +23,7 @@ const getTodos = async (req, res) => {
     const todos = await Todos.find({});
     res.status(200).send(todos);
   } catch (error) {
-    res.send({ error: true, message: error.message });
+    res.status(500).send({ error: true, message: error.message });
   }
 };
 
@@ -42,7 +42,7 @@ const addTodo = async (req, res) => {
     await newTodo.save();
     res.status(204).send();
   } catch (error) {
-    res.send({ error: true, message: error.message });
+    res.status(500).send({ error: true, message: error.message });
   }
 };
 
@@ -64,7 +64,7 @@ const updateTodo = async (req, res) => {
     await dataTodo.save();
     res.status(204).send();
   } catch (error) {
-    res.send({ error: true, message: error.message });
+    res.status(500).send({ error: true, message: error.message });
   }
 };
 
@@ -83,7 +83,7 @@ const deleteTodo = async (req, res) => {
     await Todos.findOneAndRemove({ _id: id });
     res.status(204).send();
   } catch (error) {
-    res.send({ error: true, message: error.message });
+    res.status(500).send({ error: true, message: error.message });
   }
 };
 
