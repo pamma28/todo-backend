@@ -62,4 +62,23 @@ const updateTodo = async (req, res) => {
   }
 };
 
-module.exports = { getTodo, getTodos, addTodo, updateTodo };
+/**
+ * delete Todo that match id
+ * @param {id} _id
+ */
+const deleteTodo = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const dataTodo = await Todos.findById(id);
+    if (!dataTodo) {
+      throw new Error('No todo selected to delete');
+    }
+
+    await Todos.findOneAndRemove({ _id: id });
+    res.status(204).send();
+  } catch (error) {
+    res.send({ error: true, message: error.message });
+  }
+};
+
+module.exports = { getTodo, getTodos, addTodo, updateTodo, deleteTodo };
