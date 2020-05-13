@@ -2,12 +2,18 @@ const express = require('express');
 const todosRoutes = new express.Router();
 const {
   addTodo,
+  getTodo,
   getTodos,
   updateTodo,
   deleteTodo,
 } = require('../controllers/todos.controller');
 
-// get
+// get one todo
+todosRoutes.route('/todos/:id').get(async (req, res) => {
+  await getTodo(req, res);
+});
+
+// get all todos
 todosRoutes.route('/todos/').get(async (req, res) => {
   await getTodos(req, res);
 });

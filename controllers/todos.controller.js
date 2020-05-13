@@ -2,11 +2,17 @@ require('../configs/mongodb.config');
 const Todos = require('../models/todos.model');
 
 /**
- * Get todo that match criteria
- * @param {object} filter
+ * Get todo that match id
+ * @param {id} _id
  */
-const getTodo = async (filter) => {
-  return await Todos.find(filter);
+const getTodo = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const todo = await Todos.findById(id);
+    res.status(200).send(todo);
+  } catch (error) {
+    res.send({ error: true, message: error.message });
+  }
 };
 
 /**
