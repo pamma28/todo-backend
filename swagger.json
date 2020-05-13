@@ -15,6 +15,43 @@
     }
   },
   "paths": {
+    "/todos/{id}": {
+      "get": {
+        "tags": ["Todos"],
+        "description": "Get one Todo by id",
+        "operationId": "getTodo",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id Todo",
+            "required": true,
+            "type": "ID",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of todos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/definitions/todosModel"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/definitions/errorRequest"
+          }
+        }
+      }
+    },
     "/todos": {
       "get": {
         "tags": ["Todos"],
