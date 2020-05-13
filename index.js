@@ -19,3 +19,5 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.listen(port, () =>
   console.log(`app listening at http://localhost:${port}`)
 );
+
+module.exports = app;
