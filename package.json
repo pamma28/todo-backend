@@ -1,0 +1,16 @@
+{
+  "name": "todo-backend",
+  "version": "1.0.0",
+  "description": "todo backend",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "test": "node  test.js"
+  },
+  "author": "yunas pamatda",
+  "license": "ISC"
+}
