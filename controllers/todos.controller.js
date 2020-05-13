@@ -9,9 +9,12 @@ const getTodo = async (req, res) => {
   try {
     const { id } = req.params;
     const todo = await Todos.findById(id);
+    if (!todo) {
+      throw new Error('No todo found');
+    }
     res.status(200).send(todo);
   } catch (error) {
-    res.send({ error: true, message: error.message });
+    res.status(500).send({ error: true, message: error.message });
   }
 };
 

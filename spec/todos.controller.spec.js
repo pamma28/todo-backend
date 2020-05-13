@@ -85,5 +85,50 @@ describe('Todos', () => {
           done();
         });
     }).timeout(10000);
+
+    it('it should be failed to GET todo by id', (done) => {
+      chai
+        .request(server)
+        .get(`/todos/5ebb5d0b2909395cb06ac837`)
+        .end((err, { status, body }) => {
+          expect(err).to.be.throw;
+          expect(status).to.equal(500);
+          done();
+        });
+    }).timeout(10000);
+  });
+
+  describe('/PUT todos', () => {
+    it('it should update todo', (done) => {
+      chai
+        .request(server)
+        .put(`/todos/${todoId}`)
+        .send({
+          description: 'New todo Edited',
+          deadline: new Date(new Date().getTime() + 1000000),
+          done: false,
+        })
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(204);
+          done();
+        });
+    }).timeout(10000);
+
+    it('it should be failed to update the todo', (done) => {
+      chai
+        .request(server)
+        .put(`/todos/5ebb5d0b2909395cb06ac837`)
+        .send({
+          description: 'New todo Edited Again',
+          deadline: new Date(new Date().getTime() + 1000000),
+          done: false,
+        })
+        .end((err, res) => {
+          expect(err).to.be.throw;
+          expect(res).to.have.status(500);
+          done();
+        });
+    }).timeout(10000);
   });
 });
