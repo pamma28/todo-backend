@@ -1,0 +1,185 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "version": "1.0.0",
+    "title": "Todos APIs Document",
+    "description": "API documentation for Todos Server",
+    "termsOfService": "",
+    "contact": {
+      "name": "Yunas Pamatda",
+      "url": "https://github.com/pamma28/todo-backend"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "paths": {
+    "/todos": {
+      "get": {
+        "tags": ["Todos"],
+        "description": "Returns all todos",
+        "operationId": "getTodos",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "A list of todos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "$ref": "#/definitions/todosModel"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/definitions/errorRequest"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Todos"],
+        "description": "Add todo list",
+        "operationId": "addTodo",
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "description": "Mengerjakan Test",
+                  "deadline": "2020-05-14",
+                  "done": true
+                },
+                "$ref": "#/definitions/todosModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Succesfully adding data."
+          },
+          "500": {
+            "$ref": "#/definitions/errorRequest"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Todos"],
+        "description": "Update Todo",
+        "operationId": "updateTodo",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id Todo",
+            "required": true,
+            "type": "ID",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "description": "Mengerjakan tes lebih giat",
+                  "deadline": "2020-05-14",
+                  "done": true
+                },
+                "$ref": "#/definitions/todosModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successfully updating data."
+          },
+          "500": {
+            "$ref": "#/definitions/errorRequest"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Todos"],
+        "description": "delete Todo ",
+        "operationId": "deleteTodo",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id Todo",
+            "required": true,
+            "type": "ID",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleting data."
+          },
+          "500": {
+            "$ref": "#/definitions/errorRequest"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "todosModel": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "name todo"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date",
+          "description": "date of deadline"
+        },
+        "done": {
+          "type": "boolean",
+          "description": "accomplished or not"
+        }
+      }
+    },
+    "errorRequest": {
+      "description": "error request",
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "error": {
+                "type": "boolean",
+                "description": "error"
+              },
+              "message": {
+                "type": "string",
+                "description": "error from system"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {}
+  }
+}
